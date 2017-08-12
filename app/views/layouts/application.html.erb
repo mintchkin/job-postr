@@ -9,6 +9,10 @@
   </head>
 
   <body>
+    <div id="navbar">
+      <%= link_to "Jobs List", jobs_path %>
+      <%= link_to "New Job", new_job_path %>
+    </div>
     <%= yield %>
   </body>
 </html>
