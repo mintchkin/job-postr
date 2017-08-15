@@ -1,7 +1,9 @@
 <h1>jobs#new</h1>
 
 <%= form_for @job do |f| %>
+  <%= f.label :title, "Job Title" %>
   <%= f.text_field :title %>
+  <%= f.label :description %>
   <%= f.text_area :description %>
   <%= f.submit %>
 <% end %>
