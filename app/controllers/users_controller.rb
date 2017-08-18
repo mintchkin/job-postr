@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params.require(:user).permit(:name, :email, :password, :password_confirmation))
     if @user.save
+      login @user
       redirect_to @user, flash: {success: "Successfully created new user"}
     else
       render :new
