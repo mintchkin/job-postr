@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :login_gatekeeper, only: [:show]
+
   def show
     @user = User.find(params[:id])
   end
@@ -12,6 +14,14 @@ class UsersController < ApplicationController
       redirect_to @user, flash: {success: "Successfully created new user"}
     else
       render :new
+    end
+  end
+
+  private
+
+  def login_gatekeeper
+    unless logged_in?
+      redirect_to login_url, flash: {alert: "Please log in"}
     end
   end
 end
