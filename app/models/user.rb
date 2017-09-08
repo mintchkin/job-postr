@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :jobs, dependent: :destroy
+
   validates :name, presence: true,
       length: {maximum: 100, too_long: "The maximum allowed length is %{count}"}
   validates :email, presence: true,

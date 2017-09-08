@@ -1,4 +1,5 @@
 class JobsController < ApplicationController
+  before_action :login_gatekeeper, only: [:new, :create]
   def index
     @jobs = Job.all
   end
@@ -6,7 +7,7 @@ class JobsController < ApplicationController
     @job = Job.new
   end
   def create
-    @job = Job.new(params.require(:job).permit(:title, :description))
+    @job = current_user.jobs.build(params.require(:job).permit(:title, :description))
     if @job.save
       redirect_to jobs_path, flash: {success: "Job Post Created"}
     else

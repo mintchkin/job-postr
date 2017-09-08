@@ -15,4 +15,10 @@ module SessionsHelper
   def logged_in?
     current_user
   end
+
+  def login_gatekeeper
+    unless logged_in?
+      redirect_to login_url, flash: {alert: "Please log in"}
+    end
+  end
 end
