@@ -1,0 +1,14 @@
+<h1>jobs#index</h1>
+
+<% if not @jobs.empty? %>
+<ul>
+<% @jobs.each do |job| %>
+  <li>
+    <span><%= job.title %></span>
+    <span><%= job.description %></span>
+  </li>
+<% end %>
+</ul>
+<% else %>
+<div>No Posted Jobs</div>
+<% end %>
