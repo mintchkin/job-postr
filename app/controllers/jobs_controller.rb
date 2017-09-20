@@ -2,6 +2,10 @@ class JobsController < ApplicationController
   before_action :login_gatekeeper, only: [:new, :create]
   def index
     @jobs = Job.all
+    respond_to do |format|
+      format.html
+      format.json {render :json => @jobs.to_json}
+    end
   end
   def new
     @job = Job.new
