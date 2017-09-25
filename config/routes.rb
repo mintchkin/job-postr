@@ -1,11 +1,16 @@
 Rails.application.routes.draw do
   # json api routes
+  namespace :api do
+    resources :jobs, only: [:index, :create]
+    resources :users, only: [:show, :create]
+  end
+
   constraints lambda { |req| req.format == :json } do
     post '/login', to: "sessions#create"
     delete '/logout', to: "sessions#destroy"
 
-    resources :users, only: [:new, :create, :show]
-    resources :jobs
+    # resources :users, only: [:new, :create, :show]
+    # resources :jobs
   end
 
   # html requests (routing handled by react)
