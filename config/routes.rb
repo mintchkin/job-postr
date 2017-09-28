@@ -1,10 +1,19 @@
 Rails.application.routes.draw do
-  get '/login', to: "sessions#new"
-  post '/login', to: "sessions#create"
-  delete '/logout', to: "sessions#destroy"
+  # json api routes
+  namespace :api do
+    resources :jobs, only: [:index, :create]
+    resources :users, only: [:show, :create]
+  end
 
-  resources :users, only: [:new, :create, :show]
-  resources :jobs
+  constraints lambda { |req| req.format == :json } do
+    post '/login', to: "sessions#create"
+    delete '/logout', to: "sessions#destroy"
 
-  root 'jobs#index'
+    # resources :users, only: [:new, :create, :show]
+    # resources :jobs
+  end
+
+  # html requests (routing handled by react)
+  root 'application#index'
+  get '*path', to: 'application#index'
 end
