@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
-  include SessionsHelper
+  include Knock::Authenticable
 
   def index
     # Rails will route all GET requests to this action
