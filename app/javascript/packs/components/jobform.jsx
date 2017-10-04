@@ -28,7 +28,12 @@ class JobForm extends React.Component {
             job: this.state,
         }, {headers})
         .then(res => console.log(res))
-        .catch(res => console.log(res));
+        .catch(error => {
+            if (error.response.status === 401) {
+                sessionStorage.removeItem('jwt');
+            }
+        })
+        .catch(error => console.log(error));
     }
 
     render() {

@@ -4,12 +4,21 @@ import {
     NavLink,
 } from 'react-router-dom'
 
+const isLoggedIn = function() {
+  return !!sessionStorage.jwt;
+}
+
 const Navigation = props => (
   <div>
     <NavLink exact to="/">Jobs List</NavLink>
-    <NavLink to="/jobs/new">New Job</NavLink>
-    <NavLink to="/users/new">Sign Up</NavLink>
-    <NavLink to="/login">Log In</NavLink>
+
+    {/* links for logged in users */}
+    { isLoggedIn() && <NavLink to="/jobs/new">New Job</NavLink> }
+    { isLoggedIn() && <NavLink to="/logout">Log Out</NavLink> }
+
+    {/* links for logged out users */}
+    { !isLoggedIn() && <NavLink to="/login">Log In</NavLink> }
+    { !isLoggedIn() && <NavLink to="/users/new">Sign Up</NavLink> }
   </div>
 )
 

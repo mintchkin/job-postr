@@ -31,6 +31,7 @@ class LoginForm extends React.Component {
             sessionStorage.setItem('jwt', res.data.jwt)
             console.log(sessionStorage.getItem('jwt'))
         })
+        .then(res => this.props.history.push('/'))
         .catch(res => console.log(res));
     }
 
