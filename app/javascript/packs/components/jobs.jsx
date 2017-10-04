@@ -10,11 +10,14 @@ class Jobs extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('/api/jobs.json')
-            .then(res => {
-                this.setState({jobs: res.data});
-                console.log(this.state.jobs);
-            });
+        // const headers = {'Authorization': `Bearer ${sessionStorage.jwt}`};
+        axios.get('/api/jobs', {
+            // headers,
+        })
+        .then(res => {
+            this.setState({jobs: res.data});
+            console.log(this.state.jobs);
+        });
     }
 
     render() {
