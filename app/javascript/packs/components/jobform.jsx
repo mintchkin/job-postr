@@ -20,12 +20,20 @@ class JobForm extends React.Component {
     }
 
     handleSubmit(event) {
-        axios.post("/api/jobs.json", {
+        event.preventDefault(); // override standard form submission event
+
+        const headers = {'Authorization': `Bearer ${sessionStorage.jwt}`};
+
+        axios.post("/api/jobs", {
             job: this.state,
-        })
+        }, {headers})
         .then(res => console.log(res))
-        .catch(res => console.log(res));
-        event.preventDefault();
+        .catch(error => {
+            if (error.response.status === 401) {
+                sessionStorage.removeItem('jwt');
+            }
+        })
+        .catch(error => console.log(error));
     }
 
     render() {

@@ -1,4 +1,6 @@
 import React from 'react'
+import jwt_decode from 'jwt-decode'
+import axios from 'axios'
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -19,8 +21,18 @@ class LoginForm extends React.Component {
     }
 
     handleSubmit(event) {
-        alert("Form submitted:\n" + JSON.stringify(this.state));
-        event.preventDefault();
+        event.preventDefault(); // override standard form submission event
+
+        // retrieve and save jwt token from server
+        axios.post("/api/user_token", {
+            auth: this.state,
+        })
+        .then(res => {
+            sessionStorage.setItem('jwt', res.data.jwt)
+            console.log(sessionStorage.getItem('jwt'))
+        })
+        .then(res => this.props.history.push('/'))
+        .catch(res => console.log(res));
     }
 
     render() {
