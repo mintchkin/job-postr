@@ -6,5 +6,4 @@ const Logout = props => {
     return <Redirect to='/' />
 }
 
-
 export default Logout;
