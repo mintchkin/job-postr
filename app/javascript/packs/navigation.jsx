@@ -14,6 +14,7 @@ const Navigation = props => (
 
     {/* links for logged in users */}
     { isLoggedIn() && <NavLink to="/jobs/new">New Job</NavLink> }
+    { isLoggedIn() && <NavLink to="/profile">Profile</NavLink> }
     { isLoggedIn() && <NavLink to="/logout">Log Out</NavLink> }
 
     {/* links for logged out users */}

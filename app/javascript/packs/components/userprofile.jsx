@@ -6,6 +6,10 @@ import { getUserId, isLoggedIn } from '../util/auth'
 class UserProfile extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            jobs: [],
+            user: {},
+        }
     }
 
     componentDidMount() {
@@ -13,12 +17,29 @@ class UserProfile extends React.Component {
         axios.get(`/api/users/${getUserId()}`, {
             headers,
         })
-        .then(res => console.log(res))
+        .then(res => {
+            this.setState(res.data)
+        })
         .catch(error => console.log(error));
     }
 
     render() {
-        return <h1>PROFILE</h1>
+        const user = this.state.user;
+
+        const jobsList = this.state.jobs.map(job => 
+            <li key={job.id}>
+                <div>{job.title}</div>
+                <div>{job.description}</div>
+            </li>
+        );
+
+        return (
+            <div>
+                <h1>{user.name}</h1>
+                <div>{user.email}</div>
+                <ul>{jobsList}</ul>
+            </div>
+        )
     }
 }
 
