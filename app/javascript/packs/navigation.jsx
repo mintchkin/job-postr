@@ -3,10 +3,7 @@ import ReactDOM from 'react-dom'
 import {
     NavLink,
 } from 'react-router-dom'
-
-const isLoggedIn = function() {
-  return !!sessionStorage.jwt;
-}
+import { isLoggedIn } from './util/auth'
 
 const Navigation = props => (
   <div>
