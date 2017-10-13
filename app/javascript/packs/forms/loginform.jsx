@@ -1,6 +1,7 @@
 import React from 'react'
 import jwt_decode from 'jwt-decode'
 import axios from 'axios'
+import { InputGroup } from './form'
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -38,21 +39,13 @@ class LoginForm extends React.Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <label htmlFor="email">Email</label>
-                <input
-                id="email"
-                name="email"
-                type="email"
-                value={this.state.email}
-                onChange={this.handleChange} />
+                <InputGroup id="email" type="email" value={this.state.email} onChange={this.handleChange}>
+                    Email:
+                </InputGroup>
 
-                <label htmlFor="password">Password</label>
-                <input
-                id="password"
-                name="password"
-                type="password"
-                value={this.state.password}
-                onChange={this.handleChange} />
+                <InputGroup id="password" type="password" value={this.state.password} onChange={this.handleChange}>
+                    Password:
+                </InputGroup>
 
                 <input type="submit" value="Log In" />
             </form>

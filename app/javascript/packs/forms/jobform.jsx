@@ -1,12 +1,13 @@
 import React from 'react'
 import axios from 'axios'
+import { InputGroup, TextareaGroup } from './form'
 
 class JobForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: "",
-            description: "",
+            title: '',
+            description: '',
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -16,7 +17,7 @@ class JobForm extends React.Component {
     handleChange(event) {
         this.setState({
             [event.target.name]: event.target.value,
-        });
+        })
     }
 
     handleSubmit(event) {
@@ -39,20 +40,13 @@ class JobForm extends React.Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <label htmlFor="title">Title</label>
-                <input
-                id="title"
-                name="title"
-                type="text"
-                value={this.state.title}
-                onChange={this.handleChange}/>
+                <InputGroup id="title" type="text" value={this.state.title} onChange={this.handleChange}>
+                    Title:
+                </InputGroup>
 
-                <label htmlFor="description">Description</label>
-                <textarea
-                id="description"
-                name="description"
-                value={this.state.description}
-                onChange={this.handleChange}/>
+                <TextareaGroup id="description" value={this.state.description} onChange={this.handleChange}>
+                    Description:
+                </TextareaGroup>
 
                 <input type="submit"/>
             </form>
